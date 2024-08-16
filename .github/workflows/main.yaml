@@ -1,0 +1,16 @@
+name: Main Workflow
+
+on: [push, pull_request]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Hello, World!"
+      - name: "check is SECRET_NUMBER exists"
+        env: 
+            secret_number: ${{ secrets.SECRET_NUMBER }}
+        if: ${{ env.secret_number == '' }}
+        run: echo "SECRET_NUMBER not found"
